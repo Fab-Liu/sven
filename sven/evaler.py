@@ -22,6 +22,8 @@ class EvalerBase:
         raise NotImplementedError()
 
     def truncate(self, completion, lang):
+        print(f"lang: {lang}")
+        print(f"completion: {completion}")
         if lang == 'py':
             for match in re.finditer('\n', completion):
                 cur_idx, next_idx = match.start(), match.end()
@@ -50,7 +52,7 @@ class EvalerBase:
             completion = '\n'.join(final_lines)
         else:
             raise NotImplementedError()
-
+        print("completion after truncation: ", completion)
         return completion
 
     def process_completions(self, input_src, input_ids_len, gen_output, lang):
